@@ -1,24 +1,30 @@
-const express=require("express")
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const connectDB = require("./config/connectionDB");
 
-const app=express()
-const dotenv=require("dotenv").config()
-const connectDB=require("./config/connectionDB")
-const cors=require("cors")
+dotenv.config(); // Load environment variables
 
+const app = express();
+const PORT = process.env.PORT || 3000;
 
-const PORT=process.env.PORT || 3000 //normally process.envPORT  . if PORT is not available then use process.env.PORT || 3000
-connectDB()
+// ✅ Connect to MongoDB Atlas
+connectDB();
 
-app.use(express.json())
-app.use(cors())
-app.use(express.static("public"))
-app.use("/",require("./routes/user"))
+// ✅ Middlewares
+app.use(express.json());
+app.use(cors());
+app.use(express.static("public"));
+
+// ✅ Routes
 app.get("/", (req, res) => {
   res.send("API is working 🚀");
 });
 
-app.use("/recipe",require("./routes/recipe"))
-app.listen(PORT,(err)=>{
-    console.log(`app is listening on ${PORT}`)
+app.use("/user", require("./routes/user"));
+app.use("/recipe", require("./routes/recipe"));
 
-})
+// ✅ Start server
+app.listen(PORT, () => {
+  console.log(` Server is running on port ${PORT}`);
+});
