@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Api from './api'   //  use the shared API instance
+import Api from '../api'   //  use the shared API instance
 
 export default function InputForm({ setIsOpen }) {
   const [email, setEmail] = useState("")
