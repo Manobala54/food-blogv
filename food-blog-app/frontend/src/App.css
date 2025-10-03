@@ -441,7 +441,10 @@ section{
   .home button {
     width: 100%;
   }
-
+   .bg svg{
+    position: absolute;
+    bottom: -40px;
+   }
   .card-container {
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
