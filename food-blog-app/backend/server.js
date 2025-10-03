@@ -4,7 +4,6 @@ const app=express()
 const dotenv=require("dotenv").config()
 const connectDB=require("./config/connectionDB")
 const cors=require("cors")
-const { use } = require("react")
 
 
 const PORT=process.env.PORT || 3000 //normally process.envPORT  . if PORT is not available then use process.env.PORT || 3000
