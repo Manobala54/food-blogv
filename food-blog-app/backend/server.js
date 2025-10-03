@@ -13,8 +13,7 @@ connectDB();
 
 // ✅ Middlewares
 app.use(express.json());
-
-const cors = require("cors");
+app.use(cors());
 
 app.use(cors({
   origin: ["http://localhost:5173", "https://food-blogv-8.vercel.app/"],
