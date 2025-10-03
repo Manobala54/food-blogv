@@ -1,37 +1,31 @@
-import React from 'react'
-
+import React, { useState } from 'react'
 import foodRecipe from '../assets/foodRecipe.png'
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import RecipeItems from '../components/RecipeItems';
-import { useNavigate } from 'react-router-dom';
-import { useState } from 'react';
-import Modal from '../components/Modal';
-import InputForm from '../components/InputForm';
+import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
+import RecipeItems from '../components/RecipeItems'
+import { useNavigate } from 'react-router-dom'
+import Modal from '../components/Modal'
+import InputForm from '../components/InputForm'
 
+export default function Home() {
+    const navigate = useNavigate()
+    const [isOpen, setIsOpen] = useState(false)
 
-export default function Home(){
-     const navigate=useNavigate()
-     const[isOpen,setIsOpen]=useState(false)
-
-     const addRecipe=()=>{
-        let token=localStorage.getItem("token")
-        if(token)
-        navigate("/addRecipe")
-        else{
+    const addRecipe = () => {
+        let token = localStorage.getItem("token")
+        if (token)
+            navigate("/addRecipe")
+        else {
             setIsOpen(true)
         }
-     }
+    }
 
-  return (
+    return (
         <>
-           
             <section className='home'>
                 <div className='left'>
                     <h1>Food Recipe</h1>
-                    <h4>Welcome to Food Recipe Hub, your place to discover and share delicious recipes from around the world.
-Whether you’re a beginner or an experienced cook, you’ll find easy-to-follow recipes with step-by-step instructions, ingredients, and cooking times.<br></br>
-Share your own recipes and inspire others to try something new today!</h4>
+                    <h5>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</h5>
                     <button onClick={addRecipe}>Share your recipe</button>
                 </div>
                 <div className='right'>
@@ -39,15 +33,12 @@ Share your own recipes and inspire others to try something new today!</h4>
                 </div>
             </section>
             <div className='bg'>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#af8440ff" fillOpacity="1" d="M0,32L24,26.7C48,21,96,11,144,53.3C192,96,240,192,288,218.7C336,245,384,203,432,186.7C480,171,528,181,576,197.3C624,213,672,235,720,245.3C768,256,816,256,864,250.7C912,245,960,235,1008,224C1056,213,1104,203,1152,202.7C1200,203,1248,213,1296,218.7C1344,224,1392,224,1416,224L1440,224L1440,320L1416,320C1392,320,1344,320,1296,320C1248,320,1200,320,1152,320C1104,320,1056,320,1008,320C960,320,912,320,864,320C816,320,768,320,720,320C672,320,624,320,576,320C528,320,480,320,432,320C384,320,336,320,288,320C240,320,192,320,144,320C96,320,48,320,24,320L0,320Z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#d4f6e8" fillOpacity="1" d="M0,32L40,32C80,32,160,32,240,58.7C320,85,400,139,480,149.3C560,160,640,128,720,101.3C800,75,880,53,960,80C1040,107,1120,181,1200,213.3C1280,245,1360,235,1400,229.3L1440,224L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"></path></svg>
             </div>
-            { (isOpen) && <Modal onClose={()=>setIsOpen(false)}><InputForm setIsOpen={()=>setIsOpen(false)}/></Modal>}
+            {(isOpen) && <Modal onClose={() => setIsOpen(false)}><InputForm setIsOpen={() => setIsOpen(false)} /></Modal>}
             <div className='recipe'>
-                <RecipeItems/>
+                <RecipeItems />
             </div>
-            
-            
         </>
-    );
+    )
 }
-

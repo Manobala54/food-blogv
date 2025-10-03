@@ -1,37 +1,19 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const cors = require("cors");
-const connectDB = require("./config/connectionDB");
+const express=require("express")
+const app=express()
+const dotenv=require("dotenv").config()
+const connectDb=require("./config/connectionDb")
+const cors=require("cors")
 
-dotenv.config(); // Load environment variables
+const PORT=process.env.PORT || 3000
+connectDb()
 
-const app = express();
-const PORT = process.env.PORT || 3000;
+app.use(express.json())
+app.use(cors())
+app.use(express.static("public"))
 
-// ✅ Connect to MongoDB Atlas
-connectDB();
+app.use("/",require("./routes/user"))
+app.use("/recipe",require("./routes/recipe"))
 
-// ✅ Middlewares
-app.use(express.json());
-app.use(cors());
-
-app.use(cors({
-  origin: ["http://localhost:5173", "https://food-blogv-8.vercel.app/"],
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true
-}));
-
-app.use(express.static("public"));
-
-// ✅ Routes
-app.get("/", (req, res) => {
-  res.send("API is working 🚀");
-});
-
-app.use("/user", require("./routes/user"));
-app.use("/recipe", require("./routes/recipe"));
-
-// ✅ Start server
-app.listen(PORT, () => {
-  console.log(` Server is running on port ${PORT}`);
-});
+app.listen(PORT,(err)=>{
+    console.log(`app is listening on port ${PORT}`)
+})
